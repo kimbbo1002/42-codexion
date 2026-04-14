@@ -6,7 +6,7 @@
 /*   By: bokim <bokim@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 16:41:35 by bokim             #+#    #+#             */
-/*   Updated: 2026/04/14 19:18:22 by bokim            ###   ########.fr       */
+/*   Updated: 2026/04/14 19:25:27 by bokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,12 @@ static int	init_coders(t_hub *hub)
 	return (1);
 }
 
-int	init_hub(t_hub *hub, t_config *config)
+int	init_hub(t_hub *hub)
 {
 	int	res_dong;
 	int	res_cod;
 	int	i;
 
-	hub->config = config;
 	hub->running = true;
 	hub->start_time = get_time();
 	if (!init_dongles(hub) || !init_coders(hub))
