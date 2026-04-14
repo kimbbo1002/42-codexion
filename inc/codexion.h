@@ -6,7 +6,7 @@
 /*   By: bokim <bokim@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:54:43 by bokim             #+#    #+#             */
-/*   Updated: 2026/04/09 18:05:12 by bokim            ###   ########.fr       */
+/*   Updated: 2026/04/14 16:21:25 by bokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,5 @@ int		parse_args(int argc, char **args, t_config *config);
 int		get_running_status(t_hub *hub);
 void	print_action(t_coder *coder, char *msg);
 void	controlled_sleep(unsigned long sleep, t_hub *hub);
-
 
 #endif
