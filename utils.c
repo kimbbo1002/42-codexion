@@ -6,7 +6,7 @@
 /*   By: bokim <bokim@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 15:19:52 by bokim             #+#    #+#             */
-/*   Updated: 2026/04/14 16:21:13 by bokim            ###   ########.fr       */
+/*   Updated: 2026/04/14 19:21:57 by bokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 unsigned long	get_time(void)
 {
+	struct timeval	tv;
+
+	if (gettimeofday(&tv, NULL))
+		return (0);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
 int	get_running_status(t_hub *hub)
