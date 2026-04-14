@@ -6,7 +6,7 @@
 /*   By: bokim <bokim@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:54:47 by bokim             #+#    #+#             */
-/*   Updated: 2026/04/09 11:54:47 by bokim            ###   ########.fr       */
+/*   Updated: 2026/04/14 16:55:35 by bokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,22 @@ static int	digit_test(char **args)
 	return (1);
 }
 
-int	parse_args(int argc, char **args, t_config *config)
+int	parse_args(int argc, char **args, t_hub *hub)
 {
 	if (argc == 9 && digit_test(args) && (!strcmp(args[8], "fifo")
 			|| !strcmp(args[8], "edf")))
 	{
-		config->num_coder = atoi(args[1]);
-		config->time_burnout = atoi(args[2]);
-		config->time_compile = atoi(args[3]);
-		config->time_debug = atoi(args[4]);
-		config->time_refactor = atoi(args[5]);
-		config->num_compiles = atoi(args[6]);
-		config->dongle_cooldown = atoi(args[7]);
+		hub->config->num_coder = atoi(args[1]);
+		hub->config->time_burnout = atoi(args[2]);
+		hub->config->time_compile = atoi(args[3]);
+		hub->config->time_debug = atoi(args[4]);
+		hub->config->time_refactor = atoi(args[5]);
+		hub->config->num_compiles = atoi(args[6]);
+		hub->config->dongle_cooldown = atoi(args[7]);
 		if (!strcmp(args[8], "fifo"))
-			config->scheduler = 1;
+			hub->config->scheduler = 1;
 		else
-			config->scheduler = 0;
+			hub->config->scheduler = 0;
 		return (1);
 	}
 	else

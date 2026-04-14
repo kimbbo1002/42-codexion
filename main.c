@@ -6,7 +6,7 @@
 /*   By: bokim <bokim@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 14:48:41 by bokim             #+#    #+#             */
-/*   Updated: 2026/04/09 15:10:21 by bokim            ###   ########.fr       */
+/*   Updated: 2026/04/14 16:55:58 by bokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 int	main(int argc, char **argv)
 {
 	t_hub		hub;
-	t_config	config;
 
-	if (!parse_args(argc, argv, &config))
+	if (!parse_args(argc, argv, &hub))
 		return (0);
-	hub.config = &config;
 	init_hub(&hub);
 }
