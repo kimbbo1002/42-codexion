@@ -6,7 +6,7 @@
 /*   By: bokim <bokim@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:54:43 by bokim             #+#    #+#             */
-/*   Updated: 2026/04/14 19:22:45 by bokim            ###   ########.fr       */
+/*   Updated: 2026/04/16 08:37:11 by bokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,37 @@
 # include <unistd.h>
 
 //struct definitions
+struct					s_hub;
+typedef struct s_hub	t_hub;
+
 typedef struct s_config
 {
 	int				num_coder;
-	int				time_burnout;
-	int				time_compile;
-	int				time_debug;
-	int				time_refactor;
+	unsigned long	time_burnout;
+	unsigned long	time_compile;
+	unsigned long	time_debug;
+	unsigned long	time_refactor;
 	int				num_compiles;
-	int				dongle_cooldown;
+	unsigned long	dongle_cooldown;
 	int				scheduler;
 }					t_config;
+
+typedef	struct s_request
+{
+	int					coder_id;
+	unsigned long		deadline;
+	pthread_cond_t		cond;
+	bool				granted;
+	struct s_request	*next;
+}	t_request;
+
 
 typedef struct s_dongle
 {
 	int				id;
-	pthread_mutex_t	lock;
+	pthread_mutex_t	queue_lock;
+	t_request		*queue;
+	bool			in_use;
 	unsigned long	last_used;
 }					t_dongle;
 
@@ -73,12 +88,13 @@ typedef struct s_hub
 int				parse_args(int argc, char **args, t_hub *hub);
 
 //init.c
-int				init_hub(t_hub *hub, t_config *config);
+int				init_hub(t_hub *hub);
 
 //hub.c
 int				start_hub(t_hub *hub);
-int				stop_hub(t_hub *hub);
-int				clean_hub(t_hub *hub);
+void			stop_hub(t_hub *hub);
+void			clean_hub(t_hub *hub);
+void			dongle_cooldown(t_coder *coder);
 
 //coder.c
 void			*coder_routine(void *coder_struct);
@@ -91,5 +107,6 @@ unsigned long	get_time(void);
 int				get_running_status(t_hub *hub);
 void			print_action(t_coder *coder, char *msg);
 void			controlled_sleep(unsigned long sleep, t_hub *hub);
+unsigned long	ft_atol(const char *str);
 
 #endif

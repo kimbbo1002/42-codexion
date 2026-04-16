@@ -6,11 +6,11 @@
 /*   By: bokim <bokim@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 15:19:52 by bokim             #+#    #+#             */
-/*   Updated: 2026/04/14 19:21:57 by bokim            ###   ########.fr       */
+/*   Updated: 2026/04/14 20:05:00 by bokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/codexion.h"
+#include "codexion.h"
 
 unsigned long	get_time(void)
 {
@@ -38,7 +38,7 @@ void	print_action(t_coder *coder, char *msg)
 	pthread_mutex_lock(&coder->hub->print_lock);
 	time = get_time() - coder->hub->start_time;
 	if (get_running_status(coder->hub))
-		print("%lu %d %s\n", time, coder->id, msg);
+		printf("%lu %d %s\n", time, coder->id, msg);
 	pthread_mutex_unlock(&coder->hub->print_lock);
 }
 
@@ -53,4 +53,19 @@ void	controlled_sleep(unsigned long sleep, t_hub *hub)
 			break ;
 		usleep(500);
 	}
+}
+
+unsigned long	ft_atol(const char *str)
+{
+	int		i;
+	long	res;
+
+	i = 0;
+	res = 0;
+	while (str[i])
+	{
+		res = res * 10 + (str[i] - '0');
+		i++;
+	}
+	return (res);
 }

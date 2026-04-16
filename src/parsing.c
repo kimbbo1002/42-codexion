@@ -6,11 +6,11 @@
 /*   By: bokim <bokim@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:54:47 by bokim             #+#    #+#             */
-/*   Updated: 2026/04/14 19:17:56 by bokim            ###   ########.fr       */
+/*   Updated: 2026/04/14 20:05:30 by bokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/codexion.h"
+#include "codexion.h"
 
 static int	ft_isdigit(char c)
 {
@@ -45,12 +45,12 @@ int	parse_args(int argc, char **args, t_hub *hub)
 			|| !strcmp(args[8], "edf")))
 	{
 		hub->config->num_coder = atoi(args[1]);
-		hub->config->time_burnout = atoi(args[2]);
-		hub->config->time_compile = atoi(args[3]);
-		hub->config->time_debug = atoi(args[4]);
-		hub->config->time_refactor = atoi(args[5]);
+		hub->config->time_burnout = ft_atol(args[2]);
+		hub->config->time_compile = ft_atol(args[3]);
+		hub->config->time_debug = ft_atol(args[4]);
+		hub->config->time_refactor = ft_atol(args[5]);
 		hub->config->num_compiles = atoi(args[6]);
-		hub->config->dongle_cooldown = atoi(args[7]);
+		hub->config->dongle_cooldown = ft_atol(args[7]);
 		if (!strcmp(args[8], "fifo"))
 			hub->config->scheduler = 1;
 		else

@@ -6,7 +6,7 @@
 /*   By: bokim <bokim@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 16:41:35 by bokim             #+#    #+#             */
-/*   Updated: 2026/04/14 19:25:27 by bokim            ###   ########.fr       */
+/*   Updated: 2026/04/14 20:21:32 by bokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ static int	init_coders(t_hub *hub)
 
 int	init_hub(t_hub *hub)
 {
-	int	res_dong;
-	int	res_cod;
 	int	i;
 
 	hub->running = true;

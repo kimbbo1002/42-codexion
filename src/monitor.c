@@ -6,11 +6,11 @@
 /*   By: bokim <bokim@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 18:45:33 by bokim             #+#    #+#             */
-/*   Updated: 2026/04/14 19:14:20 by bokim            ###   ########.fr       */
+/*   Updated: 2026/04/14 20:23:30 by bokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/codexion.h"
+#include "codexion.h"
 
 static int	check_burnouts(t_hub *hub)
 {
@@ -51,7 +51,7 @@ static int	check_completion(t_hub *hub)
 		pthread_mutex_unlock(&hub->coders[i].compile_lock);
 		i++;
 	}
-	return (finished == hub->config->num_compiles);
+	return (finished == hub->config->num_coder);
 }
 
 void	*monitor_threads(void *hub_struct)
@@ -63,7 +63,7 @@ void	*monitor_threads(void *hub_struct)
 	{
 		if (check_burnouts(hub))
 			break ;
-		if (check_burnouts(hub))
+		if (check_completion(hub))
 		{
 			pthread_mutex_lock(&hub->stop_lock);
 			hub->running = false;
