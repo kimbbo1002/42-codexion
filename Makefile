@@ -6,6 +6,7 @@ SRC_DIR = src/
 OBJ_DIR = obj/
 
 SRC_FILES = coder.c\
+			dongle.c\
 			hub.c\
 			init.c\
 			main.c\

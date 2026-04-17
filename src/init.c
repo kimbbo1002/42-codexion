@@ -6,12 +6,11 @@
 /*   By: bokim <bokim@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 16:41:35 by bokim             #+#    #+#             */
-/*   Updated: 2026/04/14 20:21:32 by bokim            ###   ########.fr       */
+/*   Updated: 2026/04/17 15:45:47 by bokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "codexion.h"
-
 static int	init_dongles(t_hub *hub)
 {
 	int	i;
@@ -57,7 +56,7 @@ int	init_hub(t_hub *hub)
 {
 	int	i;
 
-	hub->running = true;
+	hub->running = 1;
 	hub->start_time = get_time();
 	if (!init_dongles(hub) || !init_coders(hub))
 	{

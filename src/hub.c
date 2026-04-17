@@ -6,7 +6,7 @@
 /*   By: bokim <bokim@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 15:46:33 by bokim             #+#    #+#             */
-/*   Updated: 2026/04/14 19:54:02 by bokim            ###   ########.fr       */
+/*   Updated: 2026/04/17 15:54:27 by bokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,6 @@ void	clean_hub(t_hub *hub)
 
 void	dongle_cooldown(t_coder *coder)
 {
-	pthread_mutex_lock(&coder->left_dongle->lock);
-	pthread_mutex_lock(&coder->right_dongle->lock);
 	controlled_sleep(coder->hub->config->dongle_cooldown, coder->hub);
-	pthread_mutex_unlock(&coder->left_dongle->lock);
-	pthread_mutex_unlock(&coder->right_dongle->lock);
 }
+

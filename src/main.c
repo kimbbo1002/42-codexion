@@ -6,7 +6,7 @@
 /*   By: bokim <bokim@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 14:48:41 by bokim             #+#    #+#             */
-/*   Updated: 2026/04/14 20:21:56 by bokim            ###   ########.fr       */
+/*   Updated: 2026/04/17 15:56:39 by bokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv)
 		return (0);
 	if (!init_hub(&hub))
 		return (0);
-	if (start_hub(&hub))
+	if (!start_hub(&hub))
 		return (0);
 	stop_hub(&hub);
 	clean_hub(&hub);

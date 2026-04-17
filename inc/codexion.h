@@ -6,7 +6,7 @@
 /*   By: bokim <bokim@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:54:43 by bokim             #+#    #+#             */
-/*   Updated: 2026/04/16 08:37:11 by bokim            ###   ########.fr       */
+/*   Updated: 2026/04/17 16:02:52 by bokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 //standard header files
 # include <pthread.h>
-# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
@@ -38,22 +37,10 @@ typedef struct s_config
 	int				scheduler;
 }					t_config;
 
-typedef	struct s_request
-{
-	int					coder_id;
-	unsigned long		deadline;
-	pthread_cond_t		cond;
-	bool				granted;
-	struct s_request	*next;
-}	t_request;
-
-
 typedef struct s_dongle
 {
 	int				id;
-	pthread_mutex_t	queue_lock;
-	t_request		*queue;
-	bool			in_use;
+	pthread_mutex_t	lock;
 	unsigned long	last_used;
 }					t_dongle;
 
@@ -79,7 +66,7 @@ typedef struct s_hub
 	t_dongle		*dongles;
 
 	unsigned long	start_time;
-	bool			running;
+	int				running;
 	pthread_mutex_t	stop_lock;
 	pthread_mutex_t	print_lock;
 }					t_hub;
@@ -99,6 +86,9 @@ void			dongle_cooldown(t_coder *coder);
 //coder.c
 void			*coder_routine(void *coder_struct);
 
+//dongle.c
+void			yield_edf(t_coder *coder);
+
 //monitor.c
 void			*monitor_threads(void *hub_struct);
 
@@ -106,6 +96,7 @@ void			*monitor_threads(void *hub_struct);
 unsigned long	get_time(void);
 int				get_running_status(t_hub *hub);
 void			print_action(t_coder *coder, char *msg);
+void			print_post_action(t_coder *coder, char *msg);
 void			controlled_sleep(unsigned long sleep, t_hub *hub);
 unsigned long	ft_atol(const char *str);
 

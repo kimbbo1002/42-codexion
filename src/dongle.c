@@ -6,38 +6,32 @@
 /*   By: bokim <bokim@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 08:43:04 by bokim             #+#    #+#             */
-/*   Updated: 2026/04/16 09:23:03 by bokim            ###   ########.fr       */
+/*   Updated: 2026/04/17 15:36:46 by bokim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "codexion.h"
 
-void	get_dongle(t_dongle *dongle, t_coder *coder)
+static unsigned long	get_deadline(t_coder *coder)
 {
-	t_request	req;
-	t_request	**pos;
-
+	unsigned long deadline;
 	pthread_mutex_lock(&coder->compile_lock);
-	req.deadline = coder->last_compile + coder->hub->config->time_burnout;
+	deadline = coder->last_compile + coder->hub->config->time_burnout;
 	pthread_mutex_unlock(&coder->compile_lock);
-	req.coder_id = coder->id;
-	req.granted = 0;
-	req.next = NULL;
-	pthread_cond_init(&req.cond, NULL);
-	pthread_mutex_lock(&dongle->queue_lock);
-	if (coder->hub->config->scheduler)
-	{
-		pos = &dongle->queue;
-		while (*pos)
-			pos = &(*pos)->next;
-		*pos = &req;
-	}
-	else
-	{
-		pos = &dongle->queue;
-		while (*pos && (*pos)->deadline <= req.deadline)
-			pos = &(*pos)->next;
-		req.next = *pos
-		*pos = &req;
-	}
+	return (deadline);
+	
+}
+
+void	yield_edf(t_coder *coder)
+{
+	t_coder			*left;
+	t_coder			*right;
+	unsigned long	my_deadline;
+
+	left = &coder->hub->coders[(coder->id - 2 + coder->hub->config->num_coder)
+								% coder->hub->config->num_coder];
+	right = &coder->hub->coders[coder->id % coder->hub->config->num_coder];
+	my_deadline = get_deadline(coder);
+	if (get_deadline(left) < my_deadline || get_deadline(right) < my_deadline)
+		controlled_sleep(1000, coder->hub);
 }
