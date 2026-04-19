@@ -6,7 +6,7 @@
 /*   By: pc <pc@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 15:25:58 by bokim             #+#    #+#             */
-/*   Updated: 2026/04/19 20:57:16 by pc               ###   ########.fr       */
+/*   Updated: 2026/04/19 21:09:59 by pc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,25 @@ void	*sim_one_coder(t_coder *coder)
 	return (NULL);
 }
 
-static void lock_dongles(t_coder *coder)
+static void	lock_dongles(t_coder *coder)
 {
-    t_dongle    *first;
-    t_dongle    *second;
+	t_dongle	*first;
+	t_dongle	*second;
 
-    if (coder->left_dongle < coder->right_dongle)
-    {
-        first = coder->left_dongle;
-        second = coder->right_dongle;
-    }
-    else
-    {
-        first = coder->right_dongle;
-        second = coder->left_dongle;
-    }
-    pthread_mutex_lock(&first->lock);
-    print_action(coder, "has taken a dongle");
-    pthread_mutex_lock(&second->lock);
-    print_action(coder, "has taken a dongle");
+	if (coder->left_dongle < coder->right_dongle)
+	{
+		first = coder->left_dongle;
+		second = coder->right_dongle;
+	}
+	else
+	{
+		first = coder->right_dongle;
+		second = coder->left_dongle;
+	}
+	pthread_mutex_lock(&first->lock);
+	print_action(coder, "has taken a dongle");
+	pthread_mutex_lock(&second->lock);
+	print_action(coder, "has taken a dongle");
 }
 
 int	compile(t_coder *coder)
@@ -57,6 +57,6 @@ int	compile(t_coder *coder)
 	pthread_mutex_lock(&coder->compile_lock);
 	coder->compile_count++;
 	pthread_mutex_unlock(&coder->compile_lock);
-    dongle_cooldown(coder);
+	dongle_cooldown(coder);
 	return (0);
 }
