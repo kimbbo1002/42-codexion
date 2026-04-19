@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   codexion.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bokim <bokim@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: pc <pc@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:54:43 by bokim             #+#    #+#             */
-/*   Updated: 2026/04/17 16:20:59 by bokim            ###   ########.fr       */
+/*   Updated: 2026/04/19 20:58:27 by pc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,10 @@ void					dongle_cooldown(t_coder *coder);
 
 // coder.c
 void					*coder_routine(void *coder_struct);
+
+//coder_compile.c
+void	                *sim_one_coder(t_coder *coder);
+int	                    compile(t_coder *coder);
 
 // dongle.c
 void					yield_edf(t_coder *coder);

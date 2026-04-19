@@ -5,7 +5,8 @@ INC_DIR = inc/
 SRC_DIR = src/
 OBJ_DIR = obj/
 
-SRC_FILES = coder.c\
+SRC_FILES = coder_compile.c\
+			coder.c\
 			dongle.c\
 			hub.c\
 			init.c\
